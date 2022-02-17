@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>응급환자 리스트</title>
+</head>
+<body>
+<h1>응급환자 리스트</h1>
+{% for img in post %}
+<div class = "container">
+    <div class = "row">
+        <div class = "col-md-4">
+            <img src="/static/image/client/{{img.client_id}}.jpg"  style="width:100%; height: 350px;">
+        </div>
+        <div class = "col-md-4">
+            <ul class = "list-group" style="height: 350px; width: 500px;">
+                <li class = "list-group-item" style = "height: 50px; width: 500px;">
+                    <font size = "5em">환자 이름: {{img.client_name}}</font>
+                </li>
+                 <li class = "list-group-item" style = "height: 50px;">
+                     <font size = "5em">환자 나이 : {{img.client_age}}</font>
+                </li>
+                 <li class = "list-group-item" style = "height: 50px;">
+                     <font size = "5em">환자 주소 : {{img.client_address}}</font>
+                </li>
+                 <li class = "list-group-item" style = "height: 50px;">
+                     <font size = "5em">기저 질환 : {{img.client_illness}}</font>
+                </li>
+                 <li class = "list-group-item" style = "height: 50px;">
+                     <font size = "5em">본인 전화 번호 : 010-7896-3458</font>
+                </li>
+                 <li class = "list-group-item" style = "height: 50px;">
+                     <font size = "5em">보호자 전화 번호 : 010-2342-4545</font>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class = "container" style = "height: 350px;">
+    <div class = "col-md-5" style= "height: 350px;">
+        {% block contents %}
+            <video name='demo' controls autoplay style="width:100%; height:100%;">
+                <source src="/media/{{img.client_id}}.mp4" type="video/mp4"></source>
+            </video>
+        {% endblock %}
+    </div>
+    <div class = "col-md-5" style="height: 350px; width:500px;">
+        <form style = "border-width:300px;">
+            <div class = "form-group">
+                <label for = "exampleFormControlTextarea1"><font size = "5em">추가 사항</font></label>
+                <div class = "col" style = "height: 300px;">
+                    <input type = "text" class = "form-control" placeholder="추가 사항 입력하세요" style = "height: 300px;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+<form action = "/call" style="margin-top: 15px;">
+    <button type = "submit" class = "btn btn-primary btn-lg btn-block">구조요청</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>구조자 화면</title>
+    <style>
+        #test1{
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>구조자 화면 페이지</h1>
+    <div class = "container1"style="margin-top: 30px; margin-left: 20px;">
+        <div class = "row">
+            <div class = "col-md-2" style = "text-align: center;">
+                <li><font size="5em">
+                    발생 시간
+                </font></li>
+                <button id= "test1" type="button" class="btn btn-primary btn-lg btn-block" style="width: 180px;">발생 시간</button>
+
+                <button id= "test1" type="button" class="btn btn-primary btn-lg btn-block" style="width: 180px; margin-top:30px;"
+                        onclick="getElementById('demo').innerHTML=Date()">출발 시간</button>
+                <p id="demo"></p>
+
+                <li><font size="5em">
+                    도착 예상 시간
+                </font></li>
+                <button id= "test1" type="button" class="btn btn-primary btn-lg btn-block" style="width: 180px;">도착 시간</button>
+            </div>
+            <div class = "col-md-4">
+                <img src="/static/image/navi.jpg" alt="네비게이션" style="width: 600px; height: 280px;">
+            </div>
+            <div class = "col-md-5" style="width: 800px; text-align: center;">
+                <table class = "table table-striped">
+                   <thead>
+                   <tr>
+                       <td><B>병원 이름</B></td>
+                       <td><B>병원 번호</B></td>
+                       <td><B>병원 주소</B></td>
+                   </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>서울대 병원</td>
+                           <td>02-222-2222</td>
+                           <td>서울특별시 종로구</td>
+                       </tr>
+                       <tr>
+                           <td>특별 병원</td>
+                           <td>02-234-2345</td>
+                           <td>서울특별시 종로구</td>
+                       </tr>
+                       <tr>
+                           <td>에이콘 병원</td>
+                           <td>02-745-7456</td>
+                           <td>서울특별시 종로구</td>
+                       </tr>
+                       <tr>
+                           <td>kpc 병원</td>
+                           <td>02-864-9556</td>
+                           <td>서울특별시 종로구</td>
+                       </tr>
+                   </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% for img in post %}
+    <div class = "container2" style="margin-top: 50px; margin-left: 20px;">
+        <div class = "row">
+            <div class = "col-md-3">
+                <img src="/static/image/client/{{img.client_id}}.jpg"  style="width:100%; height: 350px;">
+                <table align="center">
+                    <tr>
+                        <td><font size = "5em">환자 이름: {{img.client_name}}</font></td>
+                    </tr>
+                </table>
+                <table align="center">
+                    <td><font size = "5em">환자 상태 : 실신</font></td>
+                </table>
+            </div>
+            <div class = "col-md-5" style="height: 400px;">
+                {% block contents %}
+                    <video name='demo' controls autoplay style="width:100%; height:100%;">
+                        <source src="/media/{{img.client_id}}.mp4" type="video/mp4"></source>
+                    </video>
+                {% endblock %}
+            </div>
+            <div class = "col-md-3" style = "height: 400px;">
+                <div class = "row" style = "height: 50%">
+                    <div class = "col-md-4" style = "width: 50%; height: 100%">
+                        <div class ="row" style = "height : 50px; text-align:center; border:1px solid black;">
+                            <p style="margin-top: 10px; font-size: 20px;">상세 주소</p>
+                        </div>
+                        <div class = "row" style="height: 140px; text-align: center; border:1px solid black;">
+                            <p style="margin-top: 30px; font-size: 30px;">{{img.client_address}}</p>
+                        </div>
+                    </div>
+                    <div class = "col-md-4" style = "width: 50%; height: 100%">
+                        <div class ="row" style = "height : 50px; text-align:center; border:1px solid black;">
+                            <p style="margin-top: 10px; font-size: 20px;">보호자 전화번호</p>
+                        </div>
+                        <div class = "row" style="height: 140px; text-align: center; border:1px solid black;">
+                            <p style="margin-top: 50px; font-size: 20px;">010-2342-4545</p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row" style = "height: 50%">
+                    <div class = "col-md-4" style = "width: 50%; height: 100%">
+                        <div class ="row" style = "height : 50px; text-align:center; border:1px solid black;">
+                            <p style="margin-top: 10px; font-size: 20px;">기저 질환</p>
+                        </div>
+                        <div class = "row" style="height: 150px; text-align: center; border:1px solid black;">
+                            <p style="margin-top: 50px; font-size: 30px;">{{img.client_illness}}</p>
+                        </div>
+                    </div>
+                    <div class = "col-md-4" style = "width: 50%; height: 100%">
+                        <div class ="row" style = "height : 50px; text-align:center; border:1px solid black;">
+                            <p style="margin-top: 10px; font-size: 20px;">준비 도구</p>
+                        </div>
+                        <div class = "row" style="height: 150px; text-align: center; border:1px solid black;">
+                            <p style="margin-top: 50px; font-size: 30px;">{{img.client_instrument}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <form action = "/finish">
+        <button type = "submit" class = "btn btn-primary btn-lg btn-block">처리완료</button>
+    </form>
+
+</body>
+</html>
